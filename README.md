@@ -1,41 +1,47 @@
-# ERD Sistem E-Wallet
+# ERD E-Wallet System
 
 ```mermaid
 ---
-    title: Sistem E-Wallet
+    title: E-Wallet System
 ---
 erDiagram
     user{
-        string nama
-        string no_hp
+        string name
+        string phone_number
         string email
-        float saldo
-        float poin
     }
 
-    riwayat_transaksi{
-        string nama_penerima
-        date tgl_transaksi
-        float jumlah_transaksi
+    wallet{
+        float balance
+        string status
+        string pin
+    }
+
+    transaction{
+        string transaction_type
+        string recipient
+        date transaction_date
+        float amount
         string note
-        bool isSuccess
+        string status
     }
 
-    metode_pembayaran{
+    payment_method{
         string nama
     }
 
-    layanan{
+    service{
         string nama
     }
 
-    kategori{
+    kategory{
         string nama
     }
 
-    user ||--o{ riwayat_transaksi : memiliki
-    metode_pembayaran ||--o{ riwayat_transaksi : digunakan
-    layanan }|--|{ kategori : memiliki
-    layanan ||--o{ riwayat_transaksi : digunakan
+    user ||--o{ transaction : own
+    user ||--|| wallet : own
+    transaction }o--|| payment_method: use
+    transaction }o--|| service: use
+    service }o--|{ kategory : own
 
 ```
