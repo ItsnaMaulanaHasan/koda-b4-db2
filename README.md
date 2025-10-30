@@ -5,43 +5,87 @@
     title: E-Wallet System
 ---
 erDiagram
-    user{
-        string name
-        string phone_number
-        string email
+    users{
+        serial id
+        varchar(100) username
+        varchar(100) email
+        text password
+        timestamp created_at
+        timestamp updated_at
+        int created_by
+        int updated_by
     }
 
-    wallet{
+    profiles{
+        serial id
+        int user_id
+        varchar(50) no_id_card
+        text image
+        varchar(20) phone_number
+        varchar(100) address
+        timestamp created_at
+        timestamp updated_at
+        int created_by
+        int updated_by
+    }
+
+    wallets{
+        serial id
         float balance
-        string status
-        string pin
+        enum status
+        char(6) pin
+        timestamp created_at
+        timestamp updated_at
+        int created_by
+        int updated_by
     }
 
-    transaction{
-        string transaction_type
-        string recipient
+    transactions{
+        serial id
+        varchar(50) transaction_type
+        varchar(100) recipient
         date transaction_date
         float amount
-        string note
-        string status
+        text note
+        enum status
+        timestamp created_at
+        timestamp updated_at
+        int created_by
+        int updated_by
     }
 
-    payment_method{
-        string nama
+    payment_methods{
+        serial id
+        varchar(100) name
+        timestamp created_at
+        timestamp updated_at
+        int created_by
+        int updated_by
     }
 
-    service{
-        string nama
+    services{
+        serial id
+        varchar(100) name
+        timestamp created_at
+        timestamp updated_at
+        int created_by
+        int updated_by
     }
 
-    kategory{
-        string nama
+    categories{
+        serial id
+        varchar(100) name
+        timestamp created_at
+        timestamp updated_at
+        int created_by
+        int updated_by
     }
 
-    user ||--o{ transaction : own
-    user ||--|| wallet : own
-    transaction }o--|| payment_method: use
-    transaction }o--|| service: use
-    service }o--|{ kategory : own
+    users ||--o| profiles : own
+    users ||--o{ transactions : own
+    users ||--|| wallets : own
+    transactions }o--|| payment_methods : use
+    transactions }o--|| services: use
+    services }o--|{ categories : own
 
 ```
