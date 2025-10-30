@@ -46,10 +46,12 @@ erDiagram
         int user_id
         varchar(50) transaction_type
         varchar(100) recipient
-        date transaction_date
+        timestamp transaction_date
         float amount
         text note
         enum status
+        int payment_method_id
+        int service_id
         timestamp created_at
         timestamp updated_at
         int created_by
@@ -83,11 +85,22 @@ erDiagram
         int updated_by
     }
 
+    service_category{
+        serial id
+        int service_id
+        int category_id
+        timestamp created_at
+        timestamp updated_at
+        int created_by
+        int updated_by
+    }
+
     users ||--o| profiles : own
     users ||--o{ transactions : own
     users ||--|| wallets : own
     transactions }o--|| payment_methods : use
     transactions }o--|| services: use
-    services }o--|{ categories : own
+    services ||--o{ service_category : own
+    categories ||--o{ service_category : own
 
 ```
