@@ -31,6 +31,7 @@ erDiagram
 
     wallets{
         serial id
+        int user_id
         float balance
         enum status
         char(6) pin
@@ -42,6 +43,7 @@ erDiagram
 
     transactions{
         serial id
+        int user_id
         varchar(50) transaction_type
         varchar(100) recipient
         date transaction_date
